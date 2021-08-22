@@ -2,6 +2,10 @@ from django.contrib import admin
 from .models import Function
 from django.utils.html import format_html
 from .tasks import get_schedule
+from django.contrib.auth.models import User
+from django.contrib.auth.models import Group
+
+
 import os
 
 
@@ -10,15 +14,9 @@ def refresh(modeladmin, request, queryset):
         Пересчитываем все графики
     """
     for item in queryset:
-        """
-        script_path = os.path.abspath(__file__)
-        path_list = script_path.split(os.sep)
-        directory = path_list[0:len(path_list)-2]
-        rel_path = "media/schedules/saved_figure{}.png".format(item.id)
-        path = '/'.join(directory) + '/' + rel_path
-        os.remove(path)"""
         get_schedule.delay(item.id)
         item.save()
+
     refresh.short_description = "Обновить"
 
 
@@ -38,3 +36,5 @@ class FunctionAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Function, FunctionAdmin)
+admin.site.unregister(User)
+admin.site.unregister(Group)

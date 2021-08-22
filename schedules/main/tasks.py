@@ -6,7 +6,7 @@ import time
 from PIL import Image, ImageFont, ImageDraw
 import textwrap
 from numpy import *
-
+import datetime
 
 @shared_task
 def get_schedule(function_id):
@@ -22,10 +22,12 @@ def get_schedule(function_id):
         fig = plt.figure()
 
         t = arange(start, finish, step)
-
+        t_time =[]
+        for item in t:
+            t_time.append(datetime.datetime.fromtimestamp(item))
         y = eval(func.function.replace(' ', '')[2:])
-
-        plt.plot(t, y)
+        plt.xticks(rotation=30)
+        plt.plot(t_time, y)
 
         fig.savefig('media/schedules/saved_figure{}.png'.format(str(function_id)), dpi=100)
 
