@@ -11,7 +11,7 @@ import os
 
 def refresh(modeladmin, request, queryset):
     """
-        Пересчитываем все графики
+        Перерисовываем все графики
     """
     for item in queryset:
         get_schedule.delay(item.id)
@@ -35,6 +35,6 @@ class FunctionAdmin(admin.ModelAdmin):
     actions = [refresh]
 
 
-admin.site.register(Function, FunctionAdmin)
+admin.site.register(Function, FunctionAdmin)  # Добавляем в админку и убираем юзероф и группы
 admin.site.unregister(User)
 admin.site.unregister(Group)
