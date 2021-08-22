@@ -4,8 +4,6 @@ from django.utils.html import format_html
 from .tasks import get_schedule
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
-
-
 import os
 
 
@@ -35,6 +33,6 @@ class FunctionAdmin(admin.ModelAdmin):
     actions = [refresh]
 
 
-admin.site.register(Function, FunctionAdmin)  # Добавляем в админку и убираем юзероф и группы
+admin.site.register(Function, FunctionAdmin)  # Добавляем функции в админку и убираем юзероф и группы
 admin.site.unregister(User)
 admin.site.unregister(Group)

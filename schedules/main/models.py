@@ -10,15 +10,16 @@ class Function(models.Model):
 
     class Meta:
         ordering = ('-created',)
-        verbose_name = 'Запись'
-        verbose_name_plural = 'Записи'
+        verbose_name = 'График'
+        verbose_name_plural = 'Графики'
 
     def save(self, *args, **kwargs):
         """
             Переопределяем сохранение обьекта модели и вызываем celery task
         """
-        super().save(*args, **kwargs)
-        from .tasks import get_schedule
+        super().save(*args, **kwargs)   # Сохраняем 1 раз чтобы было откуда брать айдишник
+
+        from .tasks import get_schedule  # Импорт здесь, чтобы избежать Circular import Error
         get_schedule.delay(self.id)
         self.schedule = "schedules/saved_figure{}.png".format(self.id)
 
