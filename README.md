@@ -15,9 +15,10 @@
 
 Для корректной работы:
 
-  1. Поменять настройки базы данных
-  2. Все что устанавливать > pip install -r req.txt
-  3. cd schedules
+ 
+  1. Все что устанавливать > pip install -r req.txt
+  2. cd schedules
+  3. Поменять настройки базы данных + миграции
   4. python manage.py runserver
   5. Команда для celery worker > celery -A schedules worker -l INFO
 
