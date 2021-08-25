@@ -1,27 +1,14 @@
-# 70ec15bf614ceec61b217f3addfa4ebaes
-Начинающий Python разработчик
+# Django function modeling dashboard
 
-Дэшборд моделирования функций
-
-Тестовое задание от компании Alytics
+function modeling dashboard
 
 
-О проекте:
+About project
+   
+   
+   1. This webapplication renders functions (for example  y = sin(t), or y = log10(t)/t^5) with a given interval (in days) and step (in hours)
+   2. Matplotlib and numpy are used to simulate graphs. The process itself is performed through Celery asynchronous tasks.
+   3. The number of functions that can be driven in is limited by the standard library + numpy (sin, log etc.)
+   4. For faster loading of graph images, it was decided to put Redis as a caching system
 
-  1. Для моделирования графиков используется matplotlib и numpy. Сам процес производится через ассинхронные задачи Celery
-  2. Количество функций которые можно вбить ограничивается стандартной библиотекой + numpy(sin, log etc.)
-  3. Для более быстрой подгрузки изображений графиков было принято решение поставить Redis как систему кеширования
-  
-
-Для корректной работы:
-
- 
-  1. Все что устанавливать > pip install -r req.txt
-  2. cd schedules
-  3. Поменять настройки базы данных + миграции
-  4. python manage.py runserver
-  5. Команда для celery worker > celery -A schedules worker -l INFO
-
-
-P.S. Не успел за выходные запихнуть все в докер-композ, хотя имею тыкательный опыт работы с ним.
 
